@@ -1,9 +1,8 @@
 package pages;
 
-import core.Waits;
 import org.openqa.selenium.By;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import core.Waits;
 
 public class LoginPage extends BasePage {
 
@@ -14,7 +13,10 @@ public class LoginPage extends BasePage {
 
     public LoginPage assertLoaded() {
         Waits.visible(driver, username);
-        assertTrue(driver.getCurrentUrl().contains("saucedemo.com"), "Not on SauceDemo domain");
+        String url = driver.getCurrentUrl();
+        if (!url.contains("saucedemo.com")) {
+            throw new AssertionError("Expected SauceDemo domain but was: " + url);
+        }
         return this;
     }
 

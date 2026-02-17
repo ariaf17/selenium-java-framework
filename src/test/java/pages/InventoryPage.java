@@ -1,6 +1,5 @@
 package pages;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.openqa.selenium.By;
 
 import core.Waits;
@@ -12,7 +11,10 @@ public class InventoryPage extends BasePage {
 
     public InventoryPage assertLoaded() {
         Waits.visible(driver, inventoryContainer);
-        assertEquals("Products", visible(title).getText(), "Inventory page title mismatch");
+        String actualTitle = visible(title).getText();
+        if (!"Products".equals(actualTitle)) {
+            throw new AssertionError("Expected title 'Products' but was: " + actualTitle);
+        }
         return this;
     }
 }
