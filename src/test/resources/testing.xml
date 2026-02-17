@@ -3,6 +3,7 @@
   <test name="UI Tests">
     <classes>
       <class name="testng.tests.LoginTest"/>
+      <class name="testng.tests.CartTest"/>
     </classes>
   </test>
 </suite>
