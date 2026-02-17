@@ -27,6 +27,9 @@ public final class DriverFactory {
             case "chrome" -> {
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
+                if (headless) {
+                options.addArguments("--headless=new");
+                }
                 options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
 
                 if (headless) {
