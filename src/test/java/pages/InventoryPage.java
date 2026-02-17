@@ -1,7 +1,8 @@
 package pages;
 
-import core.Waits;
 import org.openqa.selenium.By;
+
+import core.Waits;
 
 public class InventoryPage extends BasePage {
 
@@ -35,6 +36,8 @@ public class InventoryPage extends BasePage {
 
     public CartPage openCart() {
         click(cartLink);
+        Waits.urlContains(driver, "cart.html");
+        Waits.jsReady(driver);
         return new CartPage();
     }
 

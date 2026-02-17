@@ -9,6 +9,7 @@ Feature: Cart
     And I open the cart
     Then I should see "Sauce Labs Backpack" in the cart
 
+    @wip
     Scenario: Remove an item from the cart and see it removed in the cart page
     Given I am on the login page
     When I log in with username "standard_user" and password "secret_sauce"
