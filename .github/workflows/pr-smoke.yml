@@ -23,7 +23,7 @@ jobs:
           cache: maven
 
       - name: Run BDD smoke (Cucumber)
-        run: mvn -B -Pbdd test -Denv=ci -Dheadless=true
+        run: mvn -B -Pbdd test -Denv=ci -Dheadless=true -Dtest=bdd.runners.CucumberSmokeTest
 
       - name: Run TestNG smoke group
         run: mvn -B -Ptestng test -Denv=ci -Dheadless=true -Dtestng.groups=smoke
