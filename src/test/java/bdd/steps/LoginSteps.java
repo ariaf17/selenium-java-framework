@@ -1,7 +1,5 @@
 package bdd.steps;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -33,10 +31,11 @@ public class LoginSteps {
         loginPage.loginExpectingFailure(username, password);
     }
 
-    @Then("I should see a login error containing {string}")
-    public void iShouldSeeALoginErrorContaining(String expectedFragment) {
-        String msg = loginPage.errorMessage();
-        assertTrue(msg.toLowerCase().contains(expectedFragment.toLowerCase()),
-                "Expected error to contain '" + expectedFragment + "' but was: " + msg);
+@Then("I should see a login error containing {string}")
+public void iShouldSeeALoginErrorContaining(String expectedFragment) {
+    String msg = loginPage.errorMessage();
+    if (!msg.toLowerCase().contains(expectedFragment.toLowerCase())) {
+        throw new AssertionError("Expected error to contain '" + expectedFragment + "' but was: " + msg);
     }
+}
 }
