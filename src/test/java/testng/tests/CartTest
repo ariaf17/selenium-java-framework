@@ -1,0 +1,26 @@
+package testng.tests;
+
+import org.testng.annotations.Test;
+import pages.CartPage;
+import pages.InventoryPage;
+import pages.LoginPage;
+import testng.base.BaseTest;
+
+public class CartTest extends BaseTest {
+
+    @Test(groups = {"smoke", "regression", "cart"})
+    public void addItemToCart_thenVisibleInCart() {
+        InventoryPage inventory = new LoginPage()
+                .assertLoaded()
+                .loginAs("standard_user", "secret_sauce")
+                .assertLoaded();
+
+        inventory.addItemToCart("Sauce Labs Backpack");
+
+        CartPage cart = inventory.openCart().assertLoaded();
+
+        if (!cart.hasItem("Sauce Labs Backpack")) {
+            throw new AssertionError("Expected item in cart: Sauce Labs Backpack");
+        }
+    }
+}

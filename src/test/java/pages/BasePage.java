@@ -44,4 +44,6 @@ public abstract class BasePage {
     public String url() {
         return driver.getCurrentUrl();
     }
+
+    
 }
