@@ -105,11 +105,6 @@ public class InventoryPage extends BasePage {
         }
     }
 
-    private void jsClick(By locator) {
-        var el = driver.findElement(locator);
-        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", el);
-    }
-
     private void waitUntilAdded(By removeBtn) {
         new org.openqa.selenium.support.ui.FluentWait<>(driver)
                 .withTimeout(java.time.Duration.ofSeconds(core.Config.timeoutSeconds()))

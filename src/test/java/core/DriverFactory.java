@@ -1,6 +1,10 @@
 package core;
 
+import java.nio.file.Paths;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +16,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+
 
 public final class DriverFactory {
 
@@ -41,6 +46,20 @@ public final class DriverFactory {
                 options.addArguments("--disable-dev-shm-usage");
 
                 driver = new ChromeDriver(options);
+
+                String profileDir = Paths.get("target", "chrome-profile", UUID.randomUUID().toString()).toString();
+                options.addArguments("--user-data-dir=" + profileDir);
+
+                Map<String, Object> prefs = new HashMap<>();
+                prefs.put("credentials_enable_service", false);
+                prefs.put("profile.password_manager_enabled", false);
+
+                // Reduce other “services” prompts
+                prefs.put("profile.default_content_setting_values.notifications", 2);
+
+                options.setExperimentalOption("prefs", prefs);
+
+                
             }
             case "firefox" -> {
                 WebDriverManager.firefoxdriver().setup();
